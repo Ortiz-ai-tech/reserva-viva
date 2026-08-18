@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import CalculadoraAgua from '../../components/CalculadoraAgua.jsx';
+---
+
+<Base
+  titulo="Cuánta agua almacenar por persona: la cifra real y de dónde sale"
+  descripcion="Cuánta agua guardar por persona y día según los estándares Sphere y la EPA, con calculadora gratuita y ajustes por clima."
+>
+  <article class="envoltura articulo">
+    <span class="rotulo">Guía · Agua</span>
+    <h1>Cuánta agua almacenar por persona</h1>
+
+    <div class="prosa">
+      <p class="destacado">
+        La respuesta corta: 4 litros por persona y día para sobrevivir, 15 para
+        vivir con higiene mínima. La diferencia entre esas dos cifras es la
+        diferencia entre aguantar y estar bien.
+      </p>
+
+      <p>
+        La recomendación que circula en casi todas partes es un galón por persona
+        y día. Es un buen punto de partida, pero esconde algo importante: ese
+        galón cubre beber y cocinar, no lavarse las manos, no limpiar una herida,
+        no fregar los platos. En una emergencia de varios días, la higiene deja de
+        ser comodidad y pasa a ser lo que evita que alguien en casa se enferme.
+      </p>
+
+      <h2>De dónde sale la cifra de 15 litros</h2>
+      <p>
+        Los estándares Sphere, la referencia que usan las organizaciones
+        humanitarias en el terreno, desglosan la necesidad diaria en tres partes:
+        entre 2.5 y 3 litros de ingesta, entre 2 y 6 de higiene personal y entre
+        3 y 6 de cocina. El total básico queda entre 7.5 y 15 litros por persona y
+        día, y 15 es el mínimo establecido como práctica, no un techo.
+      </p>
+
+      <h2>Calcula tu caso</h2>
+      <p>
+        Ajusta las personas y los días de tu hogar. El segundo modo hace la
+        pregunta al revés: mide lo que ya tienes guardado y te dice cuántos días
+        cubre en cada nivel de consumo.
+      </p>
+    </div>
+
+    <CalculadoraAgua client:visible />
+
+    <div class="prosa">
+      <h2>Los ajustes que casi nadie aplica</h2>
+      <p>
+        Dos situaciones cambian el número de forma significativa. En clima cálido
+        o con trabajo físico, la ingesta sola puede llegar a 6 litros diarios, así
+        que la reserva se calcula multiplicada por 1.5. Y si en casa hay un
+        embarazo, lactancia o alguien enfermo, la necesidad sube tanto de bebida
+        como de higiene.
+      </p>
+
+      <h2>Guardarla es la mitad del trabajo</h2>
+      <p>
+        El error más frecuente no es guardar poca agua: es guardarla mal. Un
+        recipiente de boca ancha donde se mete la mano o un vaso se contamina en
+        días. La recomendación de la OMS es explícita en usar envases con boca
+        angosta o con grifo, y ese solo cambio evita la mayor parte de la
+        recontaminación doméstica.
+      </p>
+
+      {/* Bloque de venta contextual: aparece después de resolver la duda,
+          nunca antes ni como banner flotante. */}
+      <aside class="oferta">
+        <span class="rotulo">Si quieres el sistema completo</span>
+        <h3>Manual de agua potable por clima</h3>
+        <p>
+          48 páginas: tratamiento paso a paso, dosis de cloro imprimibles,
+          desalación con destilador solar dimensionado, captación de lluvia y
+          fichas para pegar en la despensa. Adaptado a clima tropical, templado,
+          frío y costero.
+        </p>
+        <a class="enlace-producto" href="#">Ver el manual — $19</a>
+        <p class="fuente" style="margin-top:.75rem">
+          Las calculadoras de este sitio son gratuitas y seguirán siéndolo.
+        </p>
+      </aside>
+    </div>
+  </article>
+
+  <style>
+    .articulo { padding-top: 2.5rem; }
+    .articulo h1 { max-width: 18ch; }
+    .destacado {
+      font-size: 1.2rem;
+      border-left: 3px solid var(--verde);
+      padding-left: 1.1rem;
+      color: var(--tinta);
+    }
+    .oferta {
+      border: 1px solid var(--linea);
+      border-top: 3px solid var(--verde);
+      border-radius: var(--radio);
+      background: var(--papel-alto);
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .oferta h3 { margin-top: 0; }
+  </style>
+</Base>

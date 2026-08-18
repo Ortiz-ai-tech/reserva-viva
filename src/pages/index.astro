@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
+---
+
+<Base
+  titulo="Reserva Viva — Calculadoras de agua, comida y semillas"
+  descripcion="Calcula cuánta agua almacenar, cuánto te dura tu reserva y cuándo rotar tus alimentos. Gratis, sin registro, con cifras de la EPA, el CDC y los estándares Sphere."
+>
+  <section class="portada">
+    <div class="envoltura">
+      <span class="rotulo">Preparación doméstica</span>
+      <h1>Cuántos días te dura lo que ya tienes en casa.</h1>
+      <p class="entrada-texto">
+        La mayoría de la gente no sabe si su reserva cubre tres días o tres semanas.
+        Estas calculadoras responden esa pregunta con las cifras que usan los
+        organismos de emergencia, no con estimaciones.
+      </p>
+      <div class="regla"></div>
+    </div>
+  </section>
+
+  <section class="envoltura" id="calculadoras">
+    <h2>Agua</h2>
+    <p class="prosa">
+      Dos preguntas, la misma herramienta: cuánta agua deberías tener, y cuánto
+      dura la que ya tienes según el nivel de consumo.
+    </p>
+
+    {/* client:visible = el HTML se sirve estático y React solo se carga
+        cuando la calculadora entra en pantalla. Ese es el modelo de islas. */}
+    <CalculadoraAgua client:visible />
+
+    <div class="aviso">
+      <strong>Lo que estas cifras no cubren:</strong> el agua almacenada no sirve
+      de nada si se contamina en el recipiente. Usa envases de grado alimenticio
+      con boca angosta o grifo, y rota cada seis meses.
+    </div>
+  </section>
+
+  <section class="envoltura proximas">
+    <h2>En construcción</h2>
+    <ul class="lista-pendientes">
+      <li><strong>Dosis de cloro</strong> — litros y concentración de lejía, salida en gotas y mililitros</li>
+      <li><strong>Reserva de comida</strong> — kilos por categoría según personas y días</li>
+      <li><strong>Rotación de inventario</strong> — fecha de revisión ajustada por temperatura</li>
+      <li><strong>Viabilidad de semillas</strong> — regla de Harrington aplicada a tu forma de guardarlas</li>
+      <li><strong>Conversor</strong> — peso, volumen, temperatura y medidas de cocina</li>
+    </ul>
+  </section>
+
+  <style>
+    .portada { padding-top: 3.5rem; }
+    .portada h1 {
+      font-size: clamp(2.2rem, 6.5vw, 3.6rem);
+      max-width: 20ch;
+    }
+    .entrada-texto {
+      max-width: var(--ancho-texto);
+      font-size: 1.12rem;
+      color: var(--apagado);
+    }
+    .proximas { margin-top: 3.5rem; }
+    .lista-pendientes {
+      max-width: var(--ancho-texto);
+      padding-left: 0;
+      list-style: none;
+    }
+    .lista-pendientes li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--linea);
+      font-size: 0.98rem;
+      color: var(--apagado);
+    }
+    .lista-pendientes strong { color: var(--tinta); }
+  </style>
+</Base>

@@ -1,0 +1,119 @@
+---
+import '../styles/global.css';
+
+const {
+  titulo,
+  descripcion = 'Calculadoras gratuitas de agua, comida y semillas para preparación doméstica. Cifras de la EPA, el CDC y los estándares Sphere.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap"
+    />
+  </head>
+
+  <body>
+    <header class="cabecera">
+      <div class="envoltura cabecera__interior">
+        <a href="/" class="marca">
+          <span class="marca__nombre">Reserva Viva</span>
+          <span class="marca__lema">Preparación con números reales</span>
+        </a>
+        <nav class="nav">
+          <a href="/#calculadoras">Calculadoras</a>
+          <a href="/guias/cuanta-agua-almacenar/">Guías</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="pie">
+      <div class="envoltura">
+        <div class="regla"></div>
+        <p class="fuente">
+          Las calculadoras usan cifras de la EPA, el CDC, los estándares Sphere y el
+          USDA. Este sitio informa sobre preparación doméstica y no sustituye
+          asesoría médica ni de ingeniería. Para conservas caseras sigue
+          literalmente la guía del USDA.
+        </p>
+        <p class="fuente">© {new Date().getFullYear()} Reserva Viva</p>
+      </div>
+    </footer>
+
+    <style>
+      .cabecera {
+        border-bottom: 1px solid var(--linea);
+        background: var(--papel-alto);
+      }
+      .cabecera__interior {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-block: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .marca {
+        text-decoration: none;
+        color: inherit;
+        display: grid;
+      }
+      .marca__nombre {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 1.15rem;
+        letter-spacing: -0.02em;
+      }
+      .marca__lema {
+        font-family: var(--dato);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--apagado);
+      }
+      .nav {
+        display: flex;
+        gap: 1.25rem;
+        font-size: 0.94rem;
+      }
+      .nav a {
+        color: var(--tinta);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 2px;
+      }
+      .nav a:hover {
+        border-bottom-color: var(--verde);
+      }
+      .pie {
+        margin-top: 4rem;
+        padding-bottom: 3rem;
+      }
+      .pie p {
+        max-width: var(--ancho-texto);
+      }
+    </style>
+  </body>
+</html>

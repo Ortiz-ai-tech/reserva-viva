@@ -1,0 +1,191 @@
+/* ==========================================================================
+   TOKENS
+   Dirección: instrumento de medición, no equipo militar.
+   Verde tinta sobre papel frío, datos en monoespaciada, ámbar solo para
+   alertas. El ámbar nunca se usa como decoración.
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --tinta: #12261f;
+  --verde: #1f5d45;
+  --verde-claro: #3d8265;
+  --papel: #edf0ea;
+  --papel-alto: #f7f9f4;
+  --linea: #c9d2c8;
+  --apagado: #63736b;
+  --ambar: #b8791a;
+  --ambar-suave: #fdf3e0;
+  --alerta: #9e2f1e;
+  --alerta-suave: #fbecea;
+
+  /* Tipografía */
+  --display: 'Archivo', system-ui, sans-serif;
+  --texto: 'Source Sans 3', system-ui, sans-serif;
+  --dato: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Escala */
+  --paso-0: 1rem;
+  --paso-1: 1.25rem;
+  --paso-2: 1.6rem;
+  --paso-3: 2.1rem;
+  --paso-4: 2.8rem;
+
+  /* Espacio y forma */
+  --radio: 4px;
+  --ancho: 68rem;
+  --ancho-texto: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tinta: #e6ece6;
+    --verde: #6cba95;
+    --verde-claro: #8fd0b0;
+    --papel: #0e1714;
+    --papel-alto: #16221d;
+    --linea: #2c3d36;
+    --apagado: #93a49b;
+    --ambar: #e0a33f;
+    --ambar-suave: #2b2115;
+    --alerta: #e07a68;
+    --alerta-suave: #2e1a17;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: var(--paso-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--paso-4); }
+h2 { font-size: var(--paso-2); margin-top: 2em; }
+h3 { font-size: var(--paso-1); margin-top: 1.6em; }
+
+a {
+  color: var(--verde);
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   PIEZAS COMPARTIDAS
+   ========================================================================== */
+
+.envoltura {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.prosa {
+  max-width: var(--ancho-texto);
+}
+
+.prosa p,
+.prosa li {
+  font-size: 1.06rem;
+}
+
+/* Etiqueta superior. Marca la sección, no decora. */
+.rotulo {
+  font-family: var(--dato);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--apagado);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* Regla graduada: el motivo visual del sitio. Se usa donde hay medición. */
+.regla {
+  height: 10px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--linea) 0 1px,
+    transparent 1px 10px
+  );
+  border-bottom: 1px solid var(--linea);
+  margin: 1.5rem 0;
+}
+
+.tarjeta {
+  background: var(--papel-alto);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+}
+
+.aviso {
+  border-left: 3px solid var(--ambar);
+  background: var(--ambar-suave);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  border-radius: 0 var(--radio) var(--radio) 0;
+  margin: 1.25rem 0;
+}
+
+.aviso--critico {
+  border-left-color: var(--alerta);
+  background: var(--alerta-suave);
+}
+
+.fuente {
+  font-family: var(--dato);
+  font-size: 0.72rem;
+  color: var(--apagado);
+  line-height: 1.5;
+}
+
+/* Botón de producto: aparece solo dentro de un resultado, nunca como banner. */
+.enlace-producto {
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: var(--verde);
+  color: var(--papel-alto);
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radio);
+  text-decoration: none;
+}
