@@ -38,6 +38,30 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
     </div>
   </section>
 
+  <section class="envoltura">
+    <div class="descarga">
+      <span class="descarga__insignia">Descarga gratuita · sin correo, sin registro</span>
+      <h2 class="descarga__titulo">Agua Segura en Emergencia</h2>
+      <p class="descarga__subtitulo">
+        Las 5 fichas que deberías tener pegadas en la despensa
+      </p>
+
+      <ul class="descarga__lista">
+        <li>Cuánta agua necesitas según cuántos vivan en tu casa</li>
+        <li>Cómo hervirla y cuánto esperar, con las dosis de cloro exactas</li>
+        <li>Desinfección solar cuando no tienes ni fuego ni lejía</li>
+        <li>Cómo guardarla sin que se contamine en el envase</li>
+      </ul>
+
+      <div class="descarga__pie">
+        <p class="descarga__meta">8 páginas · ilustradas · listas para imprimir</p>
+        <a class="descarga__boton" href="/Agua_Segura_en_Emergencia_GRATIS.pdf" download>
+          Descargar PDF gratis
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="envoltura mas-calculadoras">
     <h2>Más calculadoras</h2>
     <ul class="lista-pendientes">
@@ -69,6 +93,95 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
       max-width: var(--ancho-texto);
       font-size: 1.12rem;
       color: var(--apagado);
+    }
+    .descarga {
+      background: var(--verde);
+      color: var(--papel-alto);
+      border-radius: var(--radio);
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+    .descarga__insignia {
+      display: block;
+      font-family: var(--dato);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin-bottom: 0.9rem;
+    }
+    .descarga__titulo {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--papel-alto);
+      margin: 0 0 0.4rem;
+    }
+    .descarga__subtitulo {
+      font-size: 1.05rem;
+      color: var(--papel-alto);
+      opacity: 0.92;
+      max-width: 34ch;
+      margin: 0 0 1.5rem;
+    }
+    .descarga__lista {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.75rem;
+      display: grid;
+      gap: 0.6rem;
+      max-width: 36rem;
+    }
+    .descarga__lista li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .descarga__lista li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 8px;
+      height: 8px;
+      border-radius: 1px;
+      background: var(--verde-claro);
+    }
+    .descarga__pie {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .descarga__meta {
+      font-family: var(--dato);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin: 0;
+    }
+    .descarga__boton {
+      display: inline-block;
+      background: var(--papel-alto);
+      color: var(--verde);
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 1.75rem;
+      border-radius: var(--radio);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .descarga__boton:hover { background: var(--papel); }
+    @media (max-width: 30rem) {
+      .descarga { padding: 1.75rem; }
+      .descarga__pie { flex-direction: column; align-items: flex-start; }
+      .descarga__boton { width: 100%; text-align: center; }
     }
     .mas-calculadoras { margin-top: 3.5rem; }
     .lista-pendientes {
