@@ -1,0 +1,31 @@
+---
+import Calculadora from '../../layouts/Calculadora.astro';
+import CalculadoraAgua from '../../components/CalculadoraAgua.jsx';
+---
+
+<Calculadora
+  titulo="Calculadora de agua: cuánta necesitas y cuánto te dura"
+  descripcion="Calcula cuánta agua debes almacenar por persona y cuántos días te dura la que ya tienes, según el nivel de consumo y el clima."
+  etiqueta="Calculadora · Agua"
+  h1="Calculadora de agua: cuánta necesitas y cuánto te dura"
+  contexto="Dos preguntas, la misma herramienta: cuánta agua deberías tener, y cuánto dura la que ya tienes según el nivel de consumo."
+  actual="agua"
+>
+  <CalculadoraAgua client:visible />
+
+  <div class="aviso">
+    <strong>Lo que estas cifras no cubren:</strong> el agua almacenada no sirve
+    de nada si se contamina en el recipiente. Usa envases de grado alimenticio
+    con boca angosta o grifo, y rota cada seis meses.
+  </div>
+
+  <Fragment slot="explicacion">
+    <p>
+      Los tres niveles de consumo —supervivencia, básico y normal— vienen del
+      Sphere Handbook, la referencia que usan las organizaciones humanitarias
+      en el terreno: el mínimo práctico es de 15 litros por persona y día. Los
+      ajustes por calor y por embarazo, lactancia o enfermedad son estimaciones
+      conservadoras, no cifras oficiales.
+    </p>
+  </Fragment>
+</Calculadora>

@@ -1,28 +1,25 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Calculadora from '../../layouts/Calculadora.astro';
 import ViabilidadSemillas from '../../components/ViabilidadSemillas.jsx';
 ---
 
-<Base
+<Calculadora
   titulo="Viabilidad de semillas guardadas — cuándo probar la germinación"
   descripcion="Calcula cuántos años dura la viabilidad de tus semillas guardadas según la especie, la humedad y la temperatura de almacenamiento, con la regla de Harrington."
+  etiqueta="Calculadora · Semillas"
+  h1="Viabilidad de semillas guardadas"
+  contexto="Elige la especie, cómo de seca está la semilla y dónde la guardas. La calculadora estima cuántos años dura antes de perder viabilidad y cuándo conviene hacer la próxima prueba de germinación."
+  actual="semillas"
 >
-  <section class="envoltura calc-pagina">
-    <span class="rotulo">Calculadora · Semillas</span>
-    <h1>Viabilidad de semillas guardadas</h1>
-    <p class="prosa entrada-texto">
-      Elige la especie, cómo de seca está la semilla y dónde la guardas. La
-      calculadora estima cuántos años dura antes de perder viabilidad y
-      cuándo conviene hacer la próxima prueba de germinación.
+  <ViabilidadSemillas client:visible />
+
+  <Fragment slot="explicacion">
+    <p>
+      La vida útil base de cada especie y la regla de que se duplica por cada
+      1% menos de humedad o cada 5.6 °C menos de temperatura vienen de
+      Harrington (1963, 1973), el estándar que usan los bancos de semillas de
+      la FAO. Las especies recalcitrantes —mango, aguacate, cacao, café— no
+      entran en esta regla: no toleran ni el secado ni el frío.
     </p>
-    <div class="regla"></div>
-
-    <ViabilidadSemillas client:visible />
-  </section>
-
-  <style>
-    .calc-pagina { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .calc-pagina h1 { max-width: 22ch; }
-    .entrada-texto { color: var(--apagado); font-size: 1.05rem; }
-  </style>
-</Base>
+  </Fragment>
+</Calculadora>

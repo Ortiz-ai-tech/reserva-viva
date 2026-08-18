@@ -7,6 +7,14 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ruta = Astro.url.pathname;
+
+const enlaces = [
+  { href: '/#calculadoras', etiqueta: 'Calculadoras', activo: ruta === '/' || ruta.startsWith('/calculadoras') },
+  { href: '/inventario/', etiqueta: 'Inventario', activo: ruta.startsWith('/inventario') },
+  { href: '/#descarga', etiqueta: 'Guía gratis', activo: false },
+  { href: '/guias/cuanta-agua-almacenar/', etiqueta: 'Guías', activo: ruta.startsWith('/guias') },
+];
 ---
 
 <!doctype html>
@@ -38,11 +46,32 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           <span class="marca__nombre">Reserva Viva</span>
           <span class="marca__lema">Preparación con números reales</span>
         </a>
-        <nav class="nav">
-          <a href="/#calculadoras">Calculadoras</a>
-          <a href="/inventario/">Inventario</a>
-          <a href="/calculadoras/viabilidad-semillas/">Semillas</a>
-          <a href="/guias/cuanta-agua-almacenar/">Guías</a>
+
+        <button
+          type="button"
+          class="menu-boton"
+          id="menu-boton"
+          aria-expanded="false"
+          aria-controls="nav-principal"
+          aria-label="Abrir menú"
+        >
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <nav class="nav" id="nav-principal">
+          {enlaces.map((enlace) => (
+            <a
+              href={enlace.href}
+              class={enlace.activo ? 'activa' : ''}
+              aria-current={enlace.activo ? 'page' : undefined}
+            >
+              {enlace.etiqueta}
+            </a>
+          ))}
         </nav>
       </div>
     </header>
@@ -64,10 +93,38 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       </div>
     </footer>
 
+    <script>
+      const boton = document.getElementById('menu-boton');
+      const nav = document.getElementById('nav-principal');
+
+      boton?.addEventListener('click', () => {
+        const abierta = nav?.getAttribute('data-abierta') === 'true';
+        nav?.setAttribute('data-abierta', String(!abierta));
+        boton.setAttribute('aria-expanded', String(!abierta));
+        boton.setAttribute('aria-label', abierta ? 'Abrir menú' : 'Cerrar menú');
+      });
+
+      nav?.addEventListener('click', (e) => {
+        if (e.target instanceof Element && e.target.tagName === 'A') {
+          // Se cierra en el siguiente tick: si se hace sync, ocultar el <nav>
+          // en pleno click puede cancelar la navegación del enlace en algunos
+          // navegadores móviles.
+          setTimeout(() => {
+            nav.setAttribute('data-abierta', 'false');
+            boton?.setAttribute('aria-expanded', 'false');
+            boton?.setAttribute('aria-label', 'Abrir menú');
+          }, 0);
+        }
+      });
+    </script>
+
     <style>
       .cabecera {
         border-bottom: 1px solid var(--linea);
         background: var(--papel-alto);
+        position: sticky;
+        top: 0;
+        z-index: 10;
       }
       .cabecera__interior {
         display: flex;
@@ -95,6 +152,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         text-transform: uppercase;
         color: var(--apagado);
       }
+      .menu-boton {
+        display: none;
+        border: 1px solid var(--linea);
+        background: var(--papel);
+        color: var(--tinta);
+        border-radius: var(--radio);
+        padding: 0.4rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+      }
       .nav {
         display: flex;
         gap: 1.25rem;
@@ -109,12 +177,40 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       .nav a:hover {
         border-bottom-color: var(--verde);
       }
+      .nav a.activa {
+        color: var(--verde);
+        border-bottom-color: var(--verde);
+      }
       .pie {
-        margin-top: 4rem;
+        margin-top: var(--espacio-l);
         padding-bottom: 3rem;
       }
       .pie p {
         max-width: var(--ancho-texto);
+      }
+
+      @media (max-width: 42rem) {
+        .menu-boton {
+          display: inline-flex;
+        }
+        .nav {
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          width: 100%;
+          order: 3;
+          border-top: 1px solid var(--linea);
+          margin-top: 0.9rem;
+          padding-top: 0.25rem;
+        }
+        .nav[data-abierta='true'] {
+          display: flex;
+        }
+        .nav a {
+          padding: 0.9rem 0.25rem;
+          border-bottom: 1px solid var(--linea);
+        }
       }
     </style>
   </body>

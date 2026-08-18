@@ -1,27 +1,23 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Calculadora from '../../layouts/Calculadora.astro';
 import Conversor from '../../components/Conversor.jsx';
 ---
 
-<Base
+<Calculadora
   titulo="Conversor de peso, volumen y temperatura para cocina"
   descripcion="Convierte gramos, libras, onzas, tazas, cucharadas, litros y grados Celsius, Fahrenheit y Kelvin, con las equivalencias de cocina más usadas."
+  etiqueta="Calculadora · Cocina"
+  h1="Conversor de peso, volumen y temperatura"
+  contexto="Las equivalencias de cocina más usadas en un solo lugar: peso, volumen y temperatura, sin buscar la tabla cada vez."
+  actual="conversor"
 >
-  <section class="envoltura calc-pagina">
-    <span class="rotulo">Calculadora · Cocina</span>
-    <h1>Conversor de peso, volumen y temperatura</h1>
-    <p class="prosa entrada-texto">
-      Las equivalencias de cocina más usadas en un solo lugar: peso, volumen y
-      temperatura, sin buscar la tabla cada vez.
+  <Conversor client:visible />
+
+  <Fragment slot="explicacion">
+    <p>
+      Las equivalencias de peso y volumen son las del Sistema Internacional y
+      el sistema US customary. Las de temperatura son la definición exacta de
+      las escalas Celsius, Fahrenheit y Kelvin, no una aproximación.
     </p>
-    <div class="regla"></div>
-
-    <Conversor client:visible />
-  </section>
-
-  <style>
-    .calc-pagina { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .calc-pagina h1 { max-width: 20ch; }
-    .entrada-texto { color: var(--apagado); font-size: 1.05rem; }
-  </style>
-</Base>
+  </Fragment>
+</Calculadora>

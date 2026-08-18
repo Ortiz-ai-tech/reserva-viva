@@ -1,28 +1,24 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Calculadora from '../../layouts/Calculadora.astro';
 import ReservaComida from '../../components/ReservaComida.jsx';
 ---
 
-<Base
+<Calculadora
   titulo="Cuánta comida almacenar por persona — calculadora por categoría"
   descripcion="Calcula los kilos de granos, legumbres, aceite y otras categorías que necesitas guardar según personas y días a cubrir."
+  etiqueta="Calculadora · Comida"
+  h1="Cuánta comida almacenar por persona"
+  contexto="Indica cuántas personas y cuántos días quieres cubrir. La calculadora reparte una reserva anual de referencia en kilos por categoría —granos, legumbres, aceite, azúcar, leche en polvo y sal— prorrateada a tu caso."
+  actual="comida"
 >
-  <section class="envoltura calc-pagina">
-    <span class="rotulo">Calculadora · Comida</span>
-    <h1>Cuánta comida almacenar por persona</h1>
-    <p class="prosa entrada-texto">
-      Indica cuántas personas y cuántos días quieres cubrir. La calculadora
-      reparte una reserva anual de referencia en kilos por categoría —granos,
-      legumbres, aceite, azúcar, leche en polvo y sal— prorrateada a tu caso.
+  <ReservaComida client:visible />
+
+  <Fragment slot="explicacion">
+    <p>
+      El reparto por categoría sigue la referencia de reserva anual de FEMA /
+      Ready.gov y el LDS Preparedness Manual, prorrateada a los días que
+      indiques. Es un punto de partida razonable, no una dieta completa: ajusta
+      las cantidades a lo que tu familia realmente come.
     </p>
-    <div class="regla"></div>
-
-    <ReservaComida client:visible />
-  </section>
-
-  <style>
-    .calc-pagina { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .calc-pagina h1 { max-width: 20ch; }
-    .entrada-texto { color: var(--apagado); font-size: 1.05rem; }
-  </style>
-</Base>
+  </Fragment>
+</Calculadora>

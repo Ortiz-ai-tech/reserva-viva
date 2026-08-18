@@ -1,28 +1,24 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Calculadora from '../../layouts/Calculadora.astro';
 import DosisCloro from '../../components/DosisCloro.jsx';
 ---
 
-<Base
+<Calculadora
   titulo="Dosis de cloro para desinfectar agua — gotas y mililitros exactos"
   descripcion="Calcula cuántas gotas de lejía necesitas por litro de agua según la concentración y el estado del agua, con la referencia de la EPA."
+  etiqueta="Calculadora · Agua"
+  h1="Dosis de cloro para desinfectar agua"
+  contexto="Indica cuántos litros quieres tratar, la concentración de tu lejía y si el agua está clara o turbia. La calculadora da la dosis en gotas y mililitros, además del tiempo de espera antes de beber."
+  actual="cloro"
 >
-  <section class="envoltura calc-pagina">
-    <span class="rotulo">Calculadora · Agua</span>
-    <h1>Dosis de cloro para desinfectar agua</h1>
-    <p class="prosa entrada-texto">
-      Indica cuántos litros quieres tratar, la concentración de tu lejía y si
-      el agua está clara o turbia. La calculadora da la dosis en gotas y
-      mililitros, además del tiempo de espera antes de beber.
+  <DosisCloro client:visible />
+
+  <Fragment slot="explicacion">
+    <p>
+      Las dosis y los tiempos de espera son de la guía de desinfección de
+      emergencia de la EPA: 8 gotas de lejía al 6% o 6 gotas al 8.25% por
+      galón de agua clara, dosis que se duplica —y el tiempo de espera
+      también— si el agua está turbia, con color o muy fría.
     </p>
-    <div class="regla"></div>
-
-    <DosisCloro client:visible />
-  </section>
-
-  <style>
-    .calc-pagina { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .calc-pagina h1 { max-width: 20ch; }
-    .entrada-texto { color: var(--apagado); font-size: 1.05rem; }
-  </style>
-</Base>
+  </Fragment>
+</Calculadora>

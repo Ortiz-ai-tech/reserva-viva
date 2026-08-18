@@ -1,35 +1,25 @@
 ---
-import Base from '../layouts/Base.astro';
+import Calculadora from '../layouts/Calculadora.astro';
 import Inventario from '../components/Inventario.jsx';
 ---
 
-<Base
+<Calculadora
   titulo="Inventario con alertas de rotación — cuándo caduca tu reserva"
   descripcion="Registra tus alimentos guardados y mira cuándo vence cada uno según el método de envasado y la temperatura de tu despensa. Gratis, sin cuentas, guardado en tu propio dispositivo."
+  etiqueta="Inventario"
+  h1="Inventario con alertas de rotación"
+  contexto="Registra cada ítem con su fecha de envasado, método y temperatura de almacenamiento. La fecha de vencimiento se estima con las mismas cifras de vida útil que usan las guías de este sitio, ajustadas por temperatura."
+  nota="Todo se guarda en este navegador, en este dispositivo. No hay cuentas ni servidor de por medio."
+  actual="inventario"
 >
-  <section class="envoltura calc-pagina">
-    <span class="rotulo">Inventario</span>
-    <h1>Inventario con alertas de rotación</h1>
-    <p class="prosa entrada-texto">
-      Registra cada ítem con su fecha de envasado, método y temperatura de
-      almacenamiento. La fecha de vencimiento se estima con las mismas cifras
-      de vida útil que usan las guías de este sitio, ajustadas por
-      temperatura: cada 5.5 °C por encima de 24 °C reduce la vida útil a la
-      mitad.
-    </p>
-    <p class="prosa entrada-texto entrada-texto--nota">
-      Todo se guarda en este navegador, en este dispositivo. No hay cuentas
-      ni servidor de por medio.
-    </p>
-    <div class="regla"></div>
+  <Inventario client:visible />
 
-    <Inventario client:visible />
-  </section>
-
-  <style>
-    .calc-pagina { padding-top: 2.5rem; padding-bottom: 3rem; }
-    .calc-pagina h1 { max-width: 22ch; }
-    .entrada-texto { color: var(--apagado); font-size: 1.05rem; }
-    .entrada-texto--nota { font-size: 0.92rem; }
-  </style>
-</Base>
+  <Fragment slot="explicacion">
+    <p>
+      Los años base de cada alimento asumen envasado en mylar con absorbedor
+      de oxígeno a 24 °C. Cada 5.5 °C por encima de esa temperatura reduce la
+      vida útil estimada a la mitad; otros métodos de envasado pueden
+      acortarla más de lo que muestra la calculadora.
+    </p>
+  </Fragment>
+</Calculadora>

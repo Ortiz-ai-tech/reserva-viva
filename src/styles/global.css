@@ -24,12 +24,17 @@
   --texto: 'Source Sans 3', system-ui, sans-serif;
   --dato: 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* Escala */
+  /* Escala tipográfica: contraste deliberado entre texto y títulos. */
   --paso-0: 1rem;
   --paso-1: 1.25rem;
-  --paso-2: 1.6rem;
-  --paso-3: 2.1rem;
-  --paso-4: 2.8rem;
+  --paso-2: 1.85rem;
+  --paso-3: 2.35rem;
+  --paso-4: clamp(2.35rem, 1.65rem + 3vw, 3.4rem);
+
+  /* Espacio vertical entre secciones: usar siempre estas tres, no valores sueltos. */
+  --espacio-s: 1.5rem;
+  --espacio-m: 3rem;
+  --espacio-l: 5rem;
 
   /* Espacio y forma */
   --radio: 4px;
@@ -63,6 +68,12 @@
   box-sizing: border-box;
 }
 
+/* La cabecera es sticky: sin esto, cualquier enlace con #ancla deja el
+   destino tapado debajo de ella. */
+html {
+  scroll-padding-top: 5rem;
+}
+
 body {
   margin: 0;
   background: var(--papel);
@@ -84,7 +95,7 @@ h3 {
   text-wrap: balance;
 }
 
-h1 { font-size: var(--paso-4); }
+h1 { font-size: var(--paso-4); line-height: 1.08; }
 h2 { font-size: var(--paso-2); margin-top: 2em; }
 h3 { font-size: var(--paso-1); margin-top: 1.6em; }
 
@@ -96,6 +107,14 @@ a {
 :focus-visible {
   outline: 2px solid var(--verde);
   outline-offset: 3px;
+}
+
+/* Las calculadoras ocultan visualmente el radio/checkbox real dentro de
+   .opcion y estilizan la etiqueta como tarjeta. El foco tiene que verse en
+   la tarjeta, no en un input de 1x1 invisible. */
+.opcion:has(:focus-visible) {
+  outline: 2px solid var(--verde);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {

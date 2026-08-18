@@ -1,0 +1,107 @@
+---
+import Base from './Base.astro';
+
+const { titulo, descripcion, etiqueta, h1: h1Texto, contexto, nota, actual } = Astro.props;
+
+const CALCULADORAS = [
+  { id: 'agua', nombre: 'Agua', href: '/calculadoras/agua/' },
+  { id: 'cloro', nombre: 'Dosis de cloro', href: '/calculadoras/dosis-cloro/' },
+  { id: 'comida', nombre: 'Reserva de comida', href: '/calculadoras/reserva-comida/' },
+  { id: 'conversor', nombre: 'Conversor', href: '/calculadoras/conversor/' },
+  { id: 'inventario', nombre: 'Inventario', href: '/inventario/' },
+  { id: 'semillas', nombre: 'Viabilidad de semillas', href: '/calculadoras/viabilidad-semillas/' },
+];
+---
+
+<Base titulo={titulo} descripcion={descripcion}>
+  <section class="envoltura calc-pagina">
+    <span class="rotulo">{etiqueta}</span>
+    <h1>{h1Texto}</h1>
+    <p class="prosa entrada-texto">{contexto}</p>
+    {nota && <p class="prosa entrada-texto entrada-texto--nota">{nota}</p>}
+    <div class="regla"></div>
+
+    <slot />
+
+    <section class="explicacion">
+      <h2>De dónde salen las cifras</h2>
+      <div class="prosa">
+        <slot name="explicacion" />
+      </div>
+    </section>
+
+    <nav class="otras-calculadoras" aria-label="Otras calculadoras">
+      <span class="rotulo">Otras calculadoras</span>
+      <ul>
+        {CALCULADORAS.map((c) =>
+          c.id === actual ? (
+            <li>
+              <span class="otras-calculadoras__actual" aria-current="page">
+                {c.nombre}
+              </span>
+            </li>
+          ) : (
+            <li>
+              <a href={c.href}>{c.nombre}</a>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
+  </section>
+
+  <style>
+    .calc-pagina {
+      padding-top: var(--espacio-m);
+      padding-bottom: var(--espacio-l);
+    }
+    .calc-pagina h1 {
+      max-width: 22ch;
+    }
+    .entrada-texto {
+      color: var(--apagado);
+      font-size: 1.05rem;
+    }
+    .entrada-texto--nota {
+      font-size: 0.92rem;
+    }
+    .explicacion {
+      margin-top: var(--espacio-l);
+    }
+    .explicacion h2 {
+      margin-top: 0;
+    }
+    .otras-calculadoras {
+      margin-top: var(--espacio-l);
+      padding-top: var(--espacio-s);
+      border-top: 1px solid var(--linea);
+    }
+    .otras-calculadoras ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .otras-calculadoras a,
+    .otras-calculadoras__actual {
+      display: inline-block;
+      font-size: 0.88rem;
+      padding: 0.5rem 0.85rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      text-decoration: none;
+      color: var(--tinta);
+    }
+    .otras-calculadoras a:hover {
+      border-color: var(--verde);
+      color: var(--verde);
+    }
+    .otras-calculadoras__actual {
+      color: var(--apagado);
+      background: var(--papel-alto);
+      cursor: default;
+    }
+  </style>
+</Base>

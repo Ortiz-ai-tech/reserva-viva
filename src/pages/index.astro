@@ -1,32 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
 import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
+
+const ICONOS = {
+  gota: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c-3.2 4.2-5.5 7.6-5.5 10.5a5.5 5.5 0 0 0 11 0c0-2.9-2.3-6.3-5.5-10.5z"/></svg>`,
+  matraz: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4"/><path d="M10.5 3v5.2L6 17a1.6 1.6 0 0 0 1.4 2.3h9.2A1.6 1.6 0 0 0 18 17l-4.5-8.8V3"/><circle cx="12" cy="15.5" r="1"/></svg>`,
+  saco: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5h6l.8 3.2a3.8 3.8 0 0 1-7.6 0z"/><path d="M7.3 10.5c-1.4 2.7-1.8 6-.9 9a2 2 0 0 0 1.9 1.5h7.4a2 2 0 0 0 1.9-1.5c.9-3 .5-6.3-.9-9"/></svg>`,
+  cambio: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10"/><path d="M14 5l3 3-3 3"/><path d="M17 16H7"/><path d="M10 13l-3 3 3 3"/></svg>`,
+  caja: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 12 4l8.5 4.5-8.5 4.5-8.5-4.5z"/><path d="M3.5 8.5v7L12 20l8.5-4.5v-7"/><path d="M12 13v7"/></svg>`,
+  brote: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V11"/><path d="M12 11c0-3.5-2.5-6-6-6 0 3.5 2.5 6 6 6z"/><path d="M12 14c0-3 2-5 5-5 0 3-2 5-5 5z"/></svg>`,
+};
+
+const CALCULADORAS = [
+  { nombre: 'Agua', href: '/calculadoras/agua/', resuelve: 'Cuánta necesitas y cuánto te dura lo que ya tienes', icono: 'gota' },
+  { nombre: 'Dosis de cloro', href: '/calculadoras/dosis-cloro/', resuelve: 'Gotas y mililitros exactos para desinfectar', icono: 'matraz' },
+  { nombre: 'Reserva de comida', href: '/calculadoras/reserva-comida/', resuelve: 'Kilos por categoría según personas y días', icono: 'saco' },
+  { nombre: 'Conversor', href: '/calculadoras/conversor/', resuelve: 'Peso, volumen y temperatura de cocina', icono: 'cambio' },
+  { nombre: 'Inventario', href: '/inventario/', resuelve: 'Alertas de rotación antes de que caduque', icono: 'caja' },
+  { nombre: 'Viabilidad de semillas', href: '/calculadoras/viabilidad-semillas/', resuelve: 'Cuándo probar la germinación', icono: 'brote' },
+];
 ---
 
 <Base
   titulo="Reserva Viva — Calculadoras de agua, comida y semillas"
   descripcion="Calcula cuánta agua almacenar, cuánto te dura tu reserva y cuándo rotar tus alimentos. Gratis, sin registro, con cifras de la EPA, el CDC y los estándares Sphere."
 >
-  <section class="portada">
+  <section class="hero">
     <div class="envoltura">
       <span class="rotulo">Preparación doméstica</span>
       <h1>Cuántos días te dura lo que ya tienes en casa.</h1>
-      <p class="entrada-texto">
-        La mayoría de la gente no sabe si su reserva cubre tres días o tres semanas.
-        Estas calculadoras responden esa pregunta con las cifras que usan los
-        organismos de emergencia, no con estimaciones.
+      <p class="hero__frase">
+        Calcula cuánta agua necesitas y cuánto te dura la que ya tienes, con
+        las cifras que usan los organismos de emergencia, no estimaciones.
       </p>
-      <div class="regla"></div>
     </div>
   </section>
 
-  <section class="envoltura" id="calculadoras">
-    <h2>Agua</h2>
-    <p class="prosa">
-      Dos preguntas, la misma herramienta: cuánta agua deberías tener, y cuánto
-      dura la que ya tienes según el nivel de consumo.
-    </p>
-
+  <section class="envoltura seccion-agua">
     {/* client:visible = el HTML se sirve estático y React solo se carga
         cuando la calculadora entra en pantalla. Ese es el modelo de islas. */}
     <CalculadoraAgua client:visible />
@@ -38,8 +48,23 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
     </div>
   </section>
 
-  <section class="envoltura">
-    <div class="descarga">
+  <section class="envoltura rejilla-seccion" id="calculadoras">
+    <h2>Calculadoras</h2>
+    <p class="prosa">Seis herramientas, cada una con su fuente citada. Ninguna pide correo.</p>
+
+    <div class="rejilla-calc">
+      {CALCULADORAS.map((c) => (
+        <a class="tarjeta-calc" href={c.href}>
+          <span class="tarjeta-calc__icono" set:html={ICONOS[c.icono]} />
+          <span class="tarjeta-calc__nombre">{c.nombre}</span>
+          <span class="tarjeta-calc__resuelve">{c.resuelve}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="descarga-seccion" id="descarga">
+    <div class="envoltura descarga">
       <span class="descarga__insignia">Descarga gratuita · sin correo, sin registro</span>
       <h2 class="descarga__titulo">Agua Segura en Emergencia</h2>
       <p class="descarga__subtitulo">
@@ -62,44 +87,50 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
     </div>
   </section>
 
-  <section class="envoltura mas-calculadoras">
-    <h2>Más calculadoras</h2>
-    <ul class="lista-pendientes">
-      <li>
-        <a href="/calculadoras/dosis-cloro/"><strong>Dosis de cloro</strong></a> — litros y concentración de lejía, salida en gotas y mililitros
-      </li>
-      <li>
-        <a href="/calculadoras/reserva-comida/"><strong>Reserva de comida</strong></a> — kilos por categoría según personas y días
-      </li>
-      <li>
-        <a href="/calculadoras/conversor/"><strong>Conversor</strong></a> — peso, volumen, temperatura y medidas de cocina
-      </li>
-      <li>
-        <a href="/inventario/"><strong>Inventario</strong></a> — alertas de rotación según fecha de envasado y temperatura
-      </li>
-      <li>
-        <a href="/calculadoras/viabilidad-semillas/"><strong>Viabilidad de semillas</strong></a> — regla de Harrington aplicada a tu forma de guardarlas
-      </li>
-    </ul>
+  <section class="envoltura confianza">
+    <h2>Por qué confiar en estas cifras</h2>
+    <div class="confianza__cuerpo">
+      <ul class="confianza__fuentes">
+        <li>EPA</li>
+        <li>CDC</li>
+        <li>Sphere</li>
+        <li>USDA</li>
+      </ul>
+      <p class="prosa">
+        Cada calculadora cita de dónde sale cada cifra que usa, no
+        estimaciones a ojo. Y todo el sitio —calculadoras, inventario y la
+        guía descargable— es gratis y no pide registro ni correo.
+      </p>
+    </div>
   </section>
 
   <style>
-    .portada { padding-top: 3.5rem; }
-    .portada h1 {
-      font-size: clamp(2.2rem, 6.5vw, 3.6rem);
-      max-width: 20ch;
+    .hero {
+      padding-top: var(--espacio-m);
+      padding-bottom: var(--espacio-s);
     }
-    .entrada-texto {
+    .hero h1 {
+      font-size: clamp(2.1rem, 1.3rem + 4vw, 3.4rem);
+      max-width: 20ch;
+      margin-bottom: 0.5rem;
+    }
+    .hero__frase {
       max-width: var(--ancho-texto);
-      font-size: 1.12rem;
+      font-size: 1.1rem;
       color: var(--apagado);
+      margin: 0;
+    }
+    .seccion-agua {
+      padding-top: var(--espacio-s);
+      padding-bottom: var(--espacio-m);
+    }
+
+    .descarga-seccion {
+      background: var(--verde);
+      padding-block: var(--espacio-l);
     }
     .descarga {
-      background: var(--verde);
       color: var(--papel-alto);
-      border-radius: var(--radio);
-      padding: 2.5rem;
-      margin-top: 3rem;
     }
     .descarga__insignia {
       display: block;
@@ -113,14 +144,14 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
     .descarga__titulo {
       font-family: var(--display);
       font-weight: 700;
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-size: clamp(1.9rem, 1.4rem + 2.5vw, 2.8rem);
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--papel-alto);
       margin: 0 0 0.4rem;
     }
     .descarga__subtitulo {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--papel-alto);
       opacity: 0.92;
       max-width: 34ch;
@@ -179,24 +210,94 @@ import CalculadoraAgua from '../components/CalculadoraAgua.jsx';
     }
     .descarga__boton:hover { background: var(--papel); }
     @media (max-width: 30rem) {
-      .descarga { padding: 1.75rem; }
       .descarga__pie { flex-direction: column; align-items: flex-start; }
       .descarga__boton { width: 100%; text-align: center; }
     }
-    .mas-calculadoras { margin-top: 3.5rem; }
-    .lista-pendientes {
-      max-width: var(--ancho-texto);
-      padding-left: 0;
-      list-style: none;
+
+    .rejilla-seccion {
+      margin-top: var(--espacio-l);
     }
-    .lista-pendientes li {
-      padding: 0.7rem 0;
-      border-bottom: 1px solid var(--linea);
-      font-size: 0.98rem;
+    .rejilla-calc {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: var(--espacio-s);
+    }
+    @media (max-width: 48rem) {
+      .rejilla-calc { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 30rem) {
+      .rejilla-calc { grid-template-columns: 1fr; }
+    }
+    .tarjeta-calc {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 1.5rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      background: var(--papel-alto);
+      text-decoration: none;
+      color: var(--tinta);
+    }
+    .tarjeta-calc:hover {
+      border-color: var(--verde);
+    }
+    .tarjeta-calc__icono {
       color: var(--apagado);
     }
-    .lista-pendientes strong { color: var(--tinta); }
-    .lista-pendientes a { text-decoration: none; }
-    .lista-pendientes a:hover strong { color: var(--verde); }
+    .tarjeta-calc:hover .tarjeta-calc__icono {
+      color: var(--verde);
+    }
+    .tarjeta-calc__icono :global(svg) {
+      display: block;
+      width: 28px;
+      height: 28px;
+    }
+    .tarjeta-calc__nombre {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .tarjeta-calc__resuelve {
+      font-size: 0.9rem;
+      color: var(--apagado);
+      line-height: 1.45;
+    }
+
+    .confianza {
+      margin-top: var(--espacio-l);
+      padding-top: var(--espacio-m);
+      border-top: 1px solid var(--linea);
+    }
+    .confianza__cuerpo {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: var(--espacio-s);
+    }
+    @media (min-width: 48rem) {
+      .confianza__cuerpo {
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        gap: 3rem;
+      }
+    }
+    .confianza__fuentes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .confianza__fuentes li {
+      font-family: var(--dato);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--apagado);
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid var(--linea);
+    }
   </style>
 </Base>
