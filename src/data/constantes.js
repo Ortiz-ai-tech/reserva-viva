@@ -102,6 +102,20 @@ export const PASO_DUPLICACION_C = 5.5;
 export const RESERVA_ANUAL_FUENTE =
   'FEMA / Ready.gov y LDS Preparedness Manual: referencia de reserva de un año por persona.';
 
+// --- INVENTARIO: métodos de envasado y umbral de alerta -------------------
+export const METODOS_ENVASADO = [
+  { id: 'mylar', nombre: 'Mylar + absorbedor de oxígeno' },
+  { id: 'hermetico', nombre: 'Envase hermético' },
+  { id: 'enlatado', nombre: 'Enlatado casero' },
+  { id: 'original', nombre: 'Empaque original' },
+];
+
+// Días antes del vencimiento estimado en los que un ítem pasa a "revisar pronto".
+export const UMBRALES_INVENTARIO = { avisoDias: 90 };
+
+export const INVENTARIO_NOTA =
+  'Los años base de VIDA_UTIL_BASE asumen envasado en mylar con absorbedor de oxígeno a 24 °C. Otros métodos de envasado pueden acortar la vida útil real.';
+
 // --- ENVASADO: absorbedores de oxígeno -----------------------------------
 export const ABSORBEDORES = {
   ccPorLitro: 100, // ~380 cc por galón; se redondea al alza por seguridad
