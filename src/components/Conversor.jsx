@@ -139,7 +139,8 @@ function ConversorTemperatura() {
           <input
             id="valor-temp"
             className="entrada"
-            inputMode="decimal"
+            inputMode="text"
+            pattern="-?[0-9]*[.,]?[0-9]*"
             value={valorTexto}
             onChange={(e) => setValorTexto(e.target.value)}
           />
