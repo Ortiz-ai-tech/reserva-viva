@@ -134,6 +134,25 @@ export const HARRINGTON = {
   fuente: 'Harrington (1963, 1973); estándares de banco genético FAO',
 };
 
+// Opciones de almacenamiento para la calculadora de viabilidad de semillas.
+export const OPCIONES_TEMP_SEMILLAS = [
+  { id: 'congelador', nombre: 'Congelador', valor: -18 },
+  { id: 'refrigerador', nombre: 'Refrigerador', valor: 4 },
+  { id: 'fresco', nombre: 'Ambiente fresco', valor: 15 },
+  { id: 'calido', nombre: 'Ambiente cálido', valor: 30 },
+];
+
+export const OPCIONES_HUMEDAD_SEMILLAS = [
+  { id: 'silice', nombre: 'Bien secada con gel de sílice', valor: 6 },
+  { id: 'aire', nombre: 'Secada al aire', valor: 8 },
+  { id: 'seco', nombre: 'Sin secar, clima seco', valor: 10 },
+  { id: 'humedo', nombre: 'Sin secar, clima húmedo', valor: 13 },
+];
+
+// Antelación con la que se sugiere la próxima prueba de germinación respecto
+// a la fecha estimada de pérdida de viabilidad, para dar margen a resembrar.
+export const PRUEBA_GERMINACION_ANIOS_ANTES = 1;
+
 export const SEMILLAS_BASE = [
   { id: 'cebolla', nombre: 'Cebolla, puerro, chirivía', anios: 1, tipo: 'ortodoxa' },
   { id: 'maiz-dulce', nombre: 'Maíz dulce, perejil, apio', anios: 2, tipo: 'ortodoxa' },
