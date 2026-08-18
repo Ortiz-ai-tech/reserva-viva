@@ -98,6 +98,10 @@ export const VIDA_UTIL_BASE = [
 export const TEMP_REFERENCIA_C = 24;
 export const PASO_DUPLICACION_C = 5.5;
 
+// Fuente general para el prorrateo de RESERVA_ANUAL a otros periodos.
+export const RESERVA_ANUAL_FUENTE =
+  'FEMA / Ready.gov y LDS Preparedness Manual: referencia de reserva de un año por persona.';
+
 // --- ENVASADO: absorbedores de oxígeno -----------------------------------
 export const ABSORBEDORES = {
   ccPorLitro: 100, // ~380 cc por galón; se redondea al alza por seguridad
@@ -125,6 +129,35 @@ export const SEMILLAS_BASE = [
   { id: 'granos', nombre: 'Trigo, cebada, arroz, sorgo', anios: 3, tipo: 'ortodoxa' },
   { id: 'mango', nombre: 'Mango, aguacate, cacao, café', anios: 0, tipo: 'recalcitrante' },
 ];
+
+// --- CONVERSOR: peso, volumen y temperatura -------------------------------
+export const CONVERSION_PESO = [
+  { id: 'g', nombre: 'Gramos', abrev: 'g', enGramos: 1 },
+  { id: 'kg', nombre: 'Kilogramos', abrev: 'kg', enGramos: 1000 },
+  { id: 'lb', nombre: 'Libras', abrev: 'lb', enGramos: 453.592 },
+  { id: 'oz', nombre: 'Onzas', abrev: 'oz', enGramos: 28.3495 },
+];
+
+export const CONVERSION_VOLUMEN = [
+  { id: 'ml', nombre: 'Mililitros', abrev: 'ml', enMl: 1 },
+  { id: 'l', nombre: 'Litros', abrev: 'L', enMl: 1000 },
+  { id: 'cdta', nombre: 'Cucharadita', abrev: 'cdta', enMl: 4.92892 },
+  { id: 'cda', nombre: 'Cucharada', abrev: 'cda', enMl: 14.7868 },
+  { id: 'taza', nombre: 'Taza (US)', abrev: 'taza', enMl: 236.588 },
+  { id: 'oz-fl', nombre: 'Onza fluida', abrev: 'fl oz', enMl: 29.5735 },
+  { id: 'gal', nombre: 'Galón (US)', abrev: 'gal', enMl: 3785.41 },
+];
+
+export const CONVERSION_PESO_VOLUMEN_FUENTE =
+  'Equivalencias estándar del Sistema Internacional y el sistema US customary.';
+
+// Definición exacta de las escalas Celsius, Fahrenheit y Kelvin.
+export const CONVERSION_TEMP = {
+  factorFC: 9 / 5,
+  offsetF: 32,
+  offsetK: 273.15,
+  fuente: 'Definición estándar de las escalas Celsius, Fahrenheit y Kelvin.',
+};
 
 // --- Utilidades compartidas ----------------------------------------------
 export const formatearNumero = (n, decimales = 0) =>
